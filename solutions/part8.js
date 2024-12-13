@@ -23,7 +23,6 @@ const Viz = ({currency}) => {
     if (!rate) {
             return <div>Loading currency data <Spinner inline /></div>
     }
-    console.log(chosenCurrency,rate)
 	return  <BillboardChart
     	accountId={YOUR-ACCOUNT-ID-HERE}
     	query={`select count(*)/1000 as 'USD', (count(*)/1000) * ${rate} as '${chosenCurrency}', ${rate} as 'rate'  from Public_APICall since 10 minutes ago`}
