@@ -24,7 +24,7 @@ Sign up for a free account and grab yourself an appId. Once you have one check t
 # Lab
 
 ## Part 1 - "Lights on the board"
-In this part we install al lthe necessary bits and pieces and make sure things are working correctly.
+In this part we install all the necessary bits and pieces and make sure things are working correctly.
 
 #### Step 1:
 
@@ -73,9 +73,9 @@ The nr1 create command built an example visualisation with some boilerplate code
 
 #### Step 1:
 
-Review the folder structure. You will see that there is a folder called `vizualisations` - its in here that your visualization lives in a sub folder called `currency-converter`. You can add many vustom visualizations into this package, each in a seperate folder here.
+Review the folder structure. You will see that there is a folder called `vizualisations` - its in here that your visualization lives in a sub folder called `currency-converter`. You can add many custom visualizations into this package, each in a seperate folder here.
 
-Within the `currency-converter` folfer are three files:
+Within the `currency-converter` folder are three files:
 
 - index.js - this is where your code goes
 - styles.scss - this is where you can add css styling
@@ -97,7 +97,7 @@ Now edit the `index.js` file and delete everything. Yes really! Delete it all.
 
 #### Step 4:
 
-Add the folloiwing code to `index.js`:
+Add the following code to `index.js`:
 
 ```
 const Viz = () => {
@@ -110,7 +110,7 @@ export default Viz;
 
 #### Step 4:
 
-If its still running stop the nr1 serve (CTRL+C) then restart it:
+If its still running stop the nr1 server (CTRL+C) then restart it:
 
 ```
 nr1 nerdpack:serve
@@ -126,7 +126,7 @@ Reload your browser, you should see "Hello World" and the config options should 
 
 ## Part 3 - Adding a Billboard component
 
-THe New Relic SDK comes with a number of ready built components we can use in our custom visualizations. In this case we will use the `<BillboardChart />` component.
+The New Relic SDK comes with a number of ready built components we can use in our custom visualizations. In this case we will use the `<BillboardChart />` component.
 
 #### Step 1:
 
@@ -142,7 +142,7 @@ import { BillboardChart } from 'nr1';
 
 #### Step 3:
 
-Update the return statement to return the BillboardChart instead of our hello world message. You need to supply your account ID and a query that returns some data. It doesnt matter what that data is right now, in this case we use the `Public_APICall` event type available in all US accounts to give us a number that acts as our source value in US dollars
+Update the return statement to return the BillboardChart instead of our hello world message. You need to supply your account ID and a query that returns some data. It doesnt matter what that data is right now, in this case we use the `Public_APICall` event type available in all US accounts to give us a number that acts as our source value in US dollars. (You can replace this with any query you like that returns asingle row value)
 
 ```
 const Viz = () => {
@@ -163,11 +163,11 @@ Review the changes in the browser, you should now see a billboard chart showing 
 
 ## Part 4 - Setting and using the 'rate'
 
-We have our source value in USD and we want to convert that by multiplying by a  rate. Lets start off by hard coding that rate for now.
+We have our source value in USD and we want to convert that by multiplying by an exchange rate. Lets start off by hard coding that rate for now.
 
 #### Step 1:
 
-We will use Reatc [useState hook](https://react.dev/reference/react/useState) to manage our rate value. Add another import statement to the top of the file, just after the existing one to import the useState hook:
+We will use React's [useState hook](https://react.dev/reference/react/useState) to manage our rate value. Add another import statement to the top of the file, just after the existing one to import the useState hook:
 
 ```
 import { useState } from "react";
@@ -244,9 +244,9 @@ View the changes in the browser, you should see a spinner spining indefinitely!
 
 ## Part 6 - Loading the currency data from API
 
-You need to load the data from the API and use it to set the `rate`. We'll do this using [axios](!https://axios-http.com/docs/intro) an http request library. 
+You need to load the data from the API and use it to set the `rate`. We'll do this using [axios](https://axios-http.com/docs/intro) an http request library. 
 
-> We dont actaulyl need axios, we could do it natively in nodejs but this is a good escuse to see how we can use npm modules!
+> We dont actually need axios, we could do it natively in nodejs but this is a good excuse to see how we can use npm modules!
 
 #### Step 1:
 
@@ -319,7 +319,7 @@ Add another useEffect hook to set the rate once the currencies are loaded. Add i
     }, [currencies])
 ```
 
-> This effect is run whenever the `currencies` value chanages.
+> This effect is run whenever the `currencies` value changes.
 
 
 #### Step 7:
@@ -341,7 +341,7 @@ Currently our viz is hard coded to convert to GBP. We can make this a visualizat
 Custom visualization [configuration options](https://docs.newrelic.com/docs/new-relic-solutions/build-nr-ui/custom-visualizations/configuration-options/) are configured in `nr1.json` which manages the metadata for the viz. We provide a schema that defines what configuration options should appear.
 
 
-In this case we would like to add a drop down of currencies for the user to choose from. Edit the `nr1.json` file and add the `configuration` block as follows:
+In this case we would like to add a drop down of currencies for the user to choose from. Edit the `nr1.json` file and update the `configuration` block as follows:
 
 ```
 {
@@ -395,7 +395,7 @@ Reload the custom viz browser window, you should now see the choose currency dro
 
 ## Part 8 - Wiring up the configuration
 
-You've specified want configuration you want but we now need to wire that up to our app. 
+You've specified what configuration you want but we now need to wire that up to the viz. 
 
 
 #### Step 1:
@@ -416,7 +416,7 @@ const Viz = ({currency}) => {
 
 Amend the second `useEffect` block so that it uses the chosen currency in the `setRate()` function call.  
 
-Also add `chosenCurrency` to the trigger array at the end. (This means when we change the value of `chosenCurrency` effect will run the chosen currency will be updated.)
+Also add `chosenCurrency` to the trigger array at the end. (This means when we change the value of `chosenCurrency` the effect will run and the rate will be updated.)
 
 ```
 //Set the rate using loaded currencies
@@ -429,7 +429,7 @@ useEffect( async () => {
 
 #### Step 3:
 
-Update the query in the `BillboardChart` so that the `choenCurrency`` is displayed as the label to the converted value:
+Update the `query` in the BillboardCharts so that the `chosenCurrency` is displayed as the label of the converted value:
 
 ```
 query={`select count(*)/1000 as 'USD', (count(*)/1000) * ${rate} as '${chosenCurrency}', ${rate} as 'rate'  from Public_APICall since 10 minutes ago`}
@@ -450,7 +450,7 @@ You may notice if you change the currency quite quickly the rate doesnt always u
 
 #### Step 1:
 
-If you look carefully at the query you'll see it contains two variables `rate` and `chosenCurrency`. Because these values are set independently and asynchronously they dont necessarily change at the exact same time, so there is a brief moment when one has been changed and the other hasnt.
+If you look carefully at the query you'll see it contains two variables `rate` and `chosenCurrency`. Because these values are set independently and asynchronously they don't necessarily change at the exact same time, so there is a brief moment when one has been changed and the other hasn't.
 
 ```
 select count(*)/1000 as 'USD', (count(*)/1000) * ${rate} as '${chosenCurrency}', ${rate} as 'rate'  from Public_APICall since 10 minutes ago
@@ -467,7 +467,7 @@ const [query, setQuery] = useState(null);
 
 #### Step 3:
 
-Add a new useEffetc block after the previous ones that striggers the `setQuery` when `rate` changes:
+Add a new useEffect block after the previous ones that triggers the `setQuery` when `rate` changes:
 
 ```
     //Set query when rate changes
@@ -479,7 +479,7 @@ Add a new useEffetc block after the previous ones that striggers the `setQuery` 
 
 #### Step 4:
 
-Update the BillboardChart `query` to use this state variable:
+Update the BillboardChart `query` prop to use this state variable:
 
 ```
 	return  <BillboardChart
@@ -493,11 +493,11 @@ Update the BillboardChart `query` to use this state variable:
 
 Observe the changes in the browser. You should find the chosen rate is always properly applied now.
 
-> Its a common issue with React components to need to think carefully about what changes to props will casue re rendering. By using an effect we reduce the number of times the `query` changes, which in turn reduces the actual number of backend queries made by the component.
+> Its a common issue with React components to need to think carefully about what changes to props will cause re-rendering. By using an effect we reduce the number of times the `query` changes, which in turn reduces the actual number of backend queries made by the component.
 
 [Full index.js code from Part 9](part9.js)
 
-## Part 10 - Deploying the visuazliation and adding to a dashbaord
+## Part 10 - Deploying the visualization and adding to a dashbaord
 
 The visualization is (almost!) complete, lets deploy it and add to a dashbaord.
 
@@ -508,12 +508,12 @@ Before we deploy lets make a small cosmetic change. Currently the viz is very sm
 Update the `BillboardChart` component by adding the `fullWidth` and `fullHeight` properties:
 
 ```
-	return  <BillboardChart 
-        fullWidth
-        fullHeight
-    	accountId={YOUR-ACCOUNT-ID-HERE}
-    	query={query}
-	/>
+return <BillboardChart 
+    fullWidth
+    fullHeight
+    accountId={YOUR-ACCOUNT-ID-HERE}
+    query={query}
+/>
 ```
 
 
@@ -529,7 +529,7 @@ nr1 subscription:set
 #### Step 3:
 
 - Navigate to the Apps in the main navigation.
-- Look at your URL and remove `nerdpacks=local` if its present. (This is what points it to your local machine when testing)
+- Look at your URL in the browser URL bar and remove `nerdpacks=local` if its present. (This is what points it to your local machine when testing)
 - Goto Custom Visualizations and look for your viz "Currency Converter"
 - Click Enable if asked
 - Choose a currency and add to a dashboard
@@ -544,5 +544,5 @@ Try editing the viz, you should be able to choose another currency.
 
 ## End of Lab
 
-Well done, you've succesffuly created and deployed a custom visualization. Ok its not the most exciting visualization in the world but hopefully you now have a good idea of whats involved and how you can leverage New Relic programmability to your needs.
+Well done, you've succesffuly created and deployed a custom visualization. Ok its not the most exciting visualization in the world but hopefully you now have a good idea of whats involved and how you can leverage New Relic programmability to meet your needs.
 
