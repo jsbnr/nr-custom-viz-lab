@@ -1,0 +1,25 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "currency-converter",
+    "displayName": "Currency Converter",
+    "description": "",
+    "configuration": [
+    	{
+        	"name": "currency",
+        	"title": "Choose currency",
+        	"type": "enum",
+        	"items": [
+             	{
+                	"title": "Sterling (GBP)",
+                	"value": "GBP"
+            	},{
+                	"title": "Euro (EUR)",
+                	"value": "EUR"
+            	},{
+                	"title": "Dirham (AED)",
+                	"value": "AED"
+            	}
+        	]
+    	}
+	]
+}
