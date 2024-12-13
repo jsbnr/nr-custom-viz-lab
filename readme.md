@@ -159,7 +159,7 @@ Review the changes in the browser, you should now see a billboard chart showing 
 
 ![Billboard Cart](./screenshots/billboard.png)
 
-[Full index.js code from Part 3](part3.js)
+[Full index.js code from Part 3](./solutions/part3.js)
 
 ## Part 4 - Setting and using the 'rate'
 
@@ -199,7 +199,7 @@ View the changes in the browser, you should see the USD value and another value 
 
 ![Part 4](./screenshots/part4.png)
 
-[Full index.js code from Part 4](part4.js)
+[Full index.js code from Part 4](./solutions/part4.js)
 
 
 ## Part 5 - Loading spinner
@@ -240,7 +240,7 @@ View the changes in the browser, you should see a spinner spining indefinitely!
 
 ![Spinner](./screenshots/spinner.png)
 
-[Full index.js code from Part 5](part5.js)
+[Full index.js code from Part 5](./solutions/part5.js)
 
 ## Part 6 - Loading the currency data from API
 
@@ -330,7 +330,7 @@ View the changes in the browser, you should see the exchange rates updated with 
 
 ![Part 6](./screenshots/part6.png)
 
-[Full index.js code from Part 6](part6.js)
+[Full index.js code from Part 6](./solutions/part6.js)
 
 ## Part 7 - Adding configuration options
 
@@ -391,7 +391,7 @@ Reload the custom viz browser window, you should now see the choose currency dro
 
 ![Choose currency](./screenshots/choosecurency.png)
 
-[Full nr1.json code from Part 7](part7-nr1.json)
+[Full nr1.json code from Part 7](./solutions/part7-nr1.json)
 
 ## Part 8 - Wiring up the configuration
 
@@ -441,7 +441,7 @@ Review the changes in the browser. You should be able to change the currency in 
 
 ![part7](./screenshots/part7.png)
 
-[Full index.js code from Part 8](part8.js)
+[Full index.js code from Part 8](./solutions/part8.js)
 
 
 ## Part 9 - Fixing the query bug
@@ -495,7 +495,7 @@ Observe the changes in the browser. You should find the chosen rate is always pr
 
 > Its a common issue with React components to need to think carefully about what changes to props will cause re-rendering. By using an effect we reduce the number of times the `query` changes, which in turn reduces the actual number of backend queries made by the component.
 
-[Full index.js code from Part 9](part9.js)
+[Full index.js code from Part 9](./solutions/part9.js)
 
 ## Part 10 - Deploying the visualization and adding to a dashbaord
 
@@ -539,7 +539,7 @@ nr1 subscription:set
 
 Try editing the viz, you should be able to choose another currency.
 
-[Full index.js code from Part 10](part10.js)
+[Full index.js code from Part 10](./solutions/part10.js)
 
 
 ## End of Lab
