@@ -9,20 +9,23 @@ const Viz = ({currency}) => {
     const [query, setQuery] = useState(null);
 
     //run once on first load to gather currencies
-    useEffect( async () => {
-        const response = await axios.get('https://openexchangerates.org/api/latest.json?app_id=YOUR-APP-ID-HERE');
-        await setCurrencies(response.data.rates);
+    useEffect( () => {
+        const fetchExchangeRates = async () => {
+            const response = await axios.get('https://openexchangerates.org/api/latest.json?app_id=YOUR-APP-ID-HERE');
+            await setCurrencies(response.data.rates);
+        }
+        fetchExchangeRates();
     }, []);
 
     //Set the rate using loaded currencies
-    useEffect( async () => {
+    useEffect( () => {
         if(currencies) {
             setRate(currencies[chosenCurrency]);
         }
     }, [currencies,chosenCurrency]);
 
     //Set query when rate changes
-    useEffect( async () => {
+    useEffect( () => {
         setQuery(`select count(*)/1000 as 'USD', (count(*)/1000) * ${rate} as '${chosenCurrency}', ${rate} as 'rate'  from Public_APICall since 10 minutes ago`)
     }, [rate]);
 

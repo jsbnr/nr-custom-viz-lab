@@ -287,7 +287,7 @@ const Viz = () => {
 
 #### Step 5:
 
-Next, just after the currencies hook add a useEffect hook to load the API data, replacing the AppId with your own:
+Next, just after the currencies hook add a useEffect hook to fetch the data from the API using axios, replacing the AppId with your own:
 
 ```
 const Viz = () => {
@@ -295,9 +295,12 @@ const Viz = () => {
     const [currencies, setCurrencies] = useState(null);
 
     //run once on first load to gather currencies
-    useEffect( async () => {
-        const response = await axios.get('https://openexchangerates.org/api/latest.json?app_id=YOUR-APP-ID');
-        setCurrencies(response.data.rates);
+    useEffect( () => {
+        const fetchExchangeRates = async () => {
+            const response = await axios.get('https://openexchangerates.org/api/latest.json?app_id=YOUR-APP-ID-HERE');
+            await setCurrencies(response.data.rates);
+        }
+        fetchExchangeRates();
     }, []);
 
 ...
@@ -312,7 +315,7 @@ Add another useEffect hook to set the rate once the currencies are loaded. Add i
 
 ```
     //Set the rate using loaded currencies
-    useEffect( async () => {
+    useEffect( () => {
         if(currencies) {
             setRate(currencies["GBP"]);
         }
@@ -420,7 +423,7 @@ Also add `chosenCurrency` to the trigger array at the end. (This means when we c
 
 ```
 //Set the rate using loaded currencies
-useEffect( async () => {
+useEffect( () => {
 	if(currencies) {
     	setRate(currencies[chosenCurrency]);
 	}
@@ -471,7 +474,7 @@ Add a new useEffect block after the previous ones that triggers the `setQuery` w
 
 ```
     //Set query when rate changes
-    useEffect( async () => {
+    useEffect( () => {
         setQuery(`select count(*)/1000 as 'USD', (count(*)/1000) * ${rate} as '${chosenCurrency}', ${rate} as 'rate'  from Public_APICall since 10 minutes ago`)
     }, [rate]);
 ```

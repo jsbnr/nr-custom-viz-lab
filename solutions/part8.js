@@ -8,13 +8,16 @@ const Viz = ({currency}) => {
     const [currencies, setCurrencies] = useState(null);
 
     //run once on first load to gather currencies
-    useEffect( async () => {
-        const response = await axios.get('https://openexchangerates.org/api/latest.json?app_id=YOUR-APP-ID-HERE');
-        await setCurrencies(response.data.rates);
+    useEffect( () => {
+        const fetchExchangeRates = async () => {
+            const response = await axios.get('https://openexchangerates.org/api/latest.json?app_id=YOUR-APP-ID-HERE');
+            await setCurrencies(response.data.rates);
+        }
+        fetchExchangeRates();
     }, []);
 
     //Set the rate using loaded currencies
-    useEffect( async () => {
+    useEffect( () => {
         if(currencies) {
             setRate(currencies[chosenCurrency]);
         }
